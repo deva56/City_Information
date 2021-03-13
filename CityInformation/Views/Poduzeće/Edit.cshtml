@@ -1,0 +1,176 @@
+﻿@model CityInformation.Models.poduzeće
+
+@{
+    ViewBag.Title = "Uredi podatke o poduzeću";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<br />
+<br />
+<h2 class="text-center">Uređivanje podataka o poduzeću</h2>
+
+<center>
+    @using (Html.BeginForm("Edit", "Poduzeće", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idPoduzeće)
+        @Html.HiddenFor(model => model.korisničkoImePoduzeće)
+
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Label("Ime poduzeća", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.imePoduzeće, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.imePoduzeće, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Label("Opis poduzeća", htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.opisPoduzeće, new { @class = "form-control", @style = "resize: none", @placeholder = "Opis vašeg poduzeća..." })
+                @Html.ValidationMessageFor(model => model.opisPoduzeće, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Label("Kontakt telefon", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.kontaktTelefon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.kontaktTelefon, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Label("Kontakt e-mail", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.kontaktEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.kontaktEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div>
+                Tip djelatnosti
+            </div>
+            <div class="dropdown" style="width:300px">
+                @Html.DropDownListFor(model => model.tipPoslovnogObjekta, (SelectList)ViewBag.djelatnost, "Odaberite", htmlAttributes: new { id = "dropdown1", @class = "form-control dropdown-select" })
+
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.tipPoslovnogObjekta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div>
+                Županija
+            </div>
+            <div class="dropdown" style="width:300px">
+                @Html.DropDownListFor(model => model.županijaPoduzeće, ViewBag.idŽupanija as SelectList, "Odaberite županiju", htmlAttributes: new { id = "idŽupanija", @class = "form-control dropdown-select" })
+
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.županijaPoduzeće, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div>
+                Grad
+            </div>
+            <div class="dropdown" style="width:300px">
+                @Html.DropDownListFor(model => model.gradPoduzeće, new SelectList(string.Empty, "idGrad", "imeGrad"), "Prvo odaberite županiju", htmlAttributes: new { id = "idGrad", @class = "form-control dropdown-select" })
+
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.gradPoduzeće, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-12">
+            <div>
+                Ulica
+            </div>
+            <div class="dropdown" style="width:300px">
+                @Html.DropDownListFor(model => model.ulicaPoduzeće, new SelectList(string.Empty, "idUlica", "imeUlica"), "Prvo odaberite grad", htmlAttributes: new { id = "idUlica", @class = "form-control dropdown-select" })
+
+            </div>
+            <div>
+                @Html.ValidationMessageFor(model => model.ulicaPoduzeće, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @Html.Label("Učini poduzeće javnim")
+                @Html.CheckBoxFor(model => model.javanPoduzeće)
+                @Html.ValidationMessageFor(model => model.javanPoduzeće, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-12">
+                <h5>(Kada ste spremni poduzeće javno prikazati na tražilici)</h5>
+            </div>
+        </div>
+
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Spremi" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+            }
+</center>
+
+<div class="form-actions no-color" style="margin:auto">
+    <a href="@Url.Action("Profil", "Poduzeće")"><input type="button" class="btn btn-primary" value="Natrag"></a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idŽupanija").change(function () {
+            var url = '@Url.Content("~/Home/ŽupanijaChanged")';
+            $.get(url, { idŽupanija: $("#idŽupanija").val() }, function (data) {
+                var items = '';
+                $("#idGrad").empty();
+                items += "<option value='" + "'>" + "Odaberite grad" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idGrad").html(items);
+            });
+        })
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idGrad").change(function () {
+            var url = '@Url.Content("~/Home/GradChanged")';
+            $.get(url, { idGrad: $("#idGrad").val() }, function (data) {
+                var items = '';
+                $("#idUlica").empty();
+                items += "<option value='" + "'>" + "Odaberite ulicu" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idUlica").html(items);
+            });
+        })
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

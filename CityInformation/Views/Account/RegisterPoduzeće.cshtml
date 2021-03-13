@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Registracija poduzeća";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<br />
+<br />
+<h2 class="text-center" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif"><u>Registracija</u></h2>
+<hr />
+<h3 class="text-center" style="margin-top:50px">
+    Kako bi ste izvršili registraciju na našoj platformi kao poduzeće ili organizacije molimo Vas
+    da nam se obratite na neki od navedenih kontakt podataka , e-mail adresu ili telefonski broj. Nakon obrade podataka biti će vam dodijeljena jednistvena
+    korisnička oznaka i lozinka kojom ćete se dalje prijavljivati na svoj profil. Kontaktirati nas možete i preko kontakt forme ispod.
+</h3>
+<br />
+<hr />
+
+<center>
+    <div class="mbr-contacts__column col-sm-12" data-form-type="formoid">
+        <div data-form-alert="true">
+            <div class="hide" data-form-alert-success="true">Thanks for filling out form!</div>
+        </div>
+        <form method="post" data-form-title="MESSAGE">
+            <input type="hidden" value="tUWwyORp9vtG3Kg830vkGN9gdKCG5RZ5CQzn33fzVQhyPMj9twOhXbV1mL+W7HY8wbUcKDIAX+vDpCXWSvYPg0pyUdVkL0UluiSB7lpKpkyamh1PjJEhttZLnnCpjYRr" data-form-email="true">
+
+            <div class="form-group">
+                <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*" data-form-field="Email">
+            </div>
+
+            <div class="form-group">
+                <textarea class="form-control input-sm input-inverse" style="resize:none" name="message" rows="4" placeholder="Poruka" data-form-field="Message"></textarea>
+            </div>
+            <div class="mbr-buttons mbr-buttons--center btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">Kontaktirajte nas</button></div>
+        </form>
+    </div>
+</center>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,95 @@
+﻿@model CityInformation.Models.ulica
+
+@{
+    ViewBag.Title = "Dodavanje nove ulice";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+<br />
+<br />
+<h2 class="text-center">Dodaj novu ulicu u bazu</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <hr />
+
+    <div class="container">
+        <center>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group col-md-12">
+                @Html.Label("Ime ulice:", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.imeUlica, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ime ulice" } })
+                @Html.ValidationMessageFor(model => model.imeUlica, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Ime županije
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.grad.idGrad, ViewBag.idŽupanija as SelectList, "Odaberite županiju", htmlAttributes: new { id = "idŽupanija", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.grad.idGrad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Ime grada
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.idGrad, new SelectList(string.Empty, "idGrad", "imeGrad"), "Prvo odaberite županiju", htmlAttributes: new { id = "idGrad", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.idGrad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </center>
+    </div>
+    <br />
+    <div class="form-group text-center">
+        <div class="col-md-12">
+            <input type="submit" value="Kreiraj" class="btn btn-primary" />
+        </div>
+    </div>
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idŽupanija").change(function () {
+            var url = '@Url.Content("~/Administrator/ŽupanijaChanged")';
+            $.get(url, { idŽupanija: $("#idŽupanija").val() }, function (data) {
+                var items = '';
+                $("#idGrad").empty();
+                items += "<option value='" + "'>" + "Odaberite grad" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idGrad").html(items);
+            });
+        })
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Natrag", "GlavniMeni")
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}

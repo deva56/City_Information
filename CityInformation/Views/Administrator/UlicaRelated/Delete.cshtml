@@ -1,0 +1,35 @@
+﻿@model CityInformation.Models.ulica
+
+@{
+    ViewBag.Title = "Brisanje ulice";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+<h2 class="text-center">Brisanje ulice iz baze</h2>
+
+@using (Html.BeginForm("DeleteUlica", "Administrator", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.idUlica)
+    <hr />
+    <h2 class="text-center">Jeste li sigurni da želite obrisati ovu ulicu iz baze?</h2>
+    <center>
+        <h3>Ime županije: @Model.grad.županija.imeŽupanija</h3>
+        <h3>Ime grada: @Model.grad.imeGrad</h3>
+        <h3>Ime ulice: @Model.imeUlica</h3>
+    </center>
+    <br />
+    <div class="form-group">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Potvrdi brisanje" class="btn btn-primary" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Natrag", "GlavniMeni")
+</div>

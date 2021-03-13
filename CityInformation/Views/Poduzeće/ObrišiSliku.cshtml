@@ -1,0 +1,30 @@
+﻿@model  IEnumerable<CityInformation.Models.slika>
+
+
+@{
+    ViewBag.Title = "Upravljanje slikama poduzeća";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+
+    <table class="table" style="margin-top:100px">
+        <tr>
+          
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.putanjaSlike)" style="width:50%;height:50%"/>
+                </td>
+                <td>
+                    <div class="form-actions no-color" style="margin:auto">
+                        <a href="@Url.Action("ObrišiSlikuConfirmed", "Poduzeće", new { id = item.idSlika })"><input type="button" class="btn btn-primary" value="Obriši sliku"></a>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+

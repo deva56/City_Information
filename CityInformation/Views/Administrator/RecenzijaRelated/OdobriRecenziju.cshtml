@@ -1,0 +1,47 @@
+﻿@model CityInformation.Models.recenzija
+
+@{
+    ViewBag.Title = "Odobri ili obriši recenziju";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+<br />
+<h2 class="text-center">Odobri ili obriši recenziju</h2>
+<br />
+<center>
+    <div>
+        Autor recenzije: @Model.korisnik.korisničkoImeKorisnik
+    </div>
+    <div>
+        Recenzija poduzeća: @Model.poduzeće.imePoduzeće
+    </div>
+    <div>
+        Datum recenzije: @Model.datumRecenzija
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        Tekst recenzije
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.tekstRecenzija, new { @class = "form-control", @style = "resize: none", @placeholder = "Opis vašeg poduzeća..." })
+        </div>
+    </div>
+</center>
+
+        <div style="display:inline-flex;margin-top:75px" class="text-center col-md-12">
+
+            <div class="col-md-6">
+                <a href="@Url.Action("OdobriRecenzijuConfirmed", "Administrator", new { id = Model.idRecenzija })"><input type="button" class="btn btn-primary" value="Odobri recenziju"></a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("DeleteRecenzija", "Administrator", new { id = Model.idRecenzija })"><input type="button" class="btn btn-primary" value="Obriši recenziju"></a>
+            </div>
+
+        </div>
+
+
+        <div>
+            @Html.ActionLink("Natrag", "OdobriRecenzijaList")
+        </div>

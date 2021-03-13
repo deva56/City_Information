@@ -1,0 +1,60 @@
+﻿@model Tuple<CityInformation.Models.korisnik, CityInformation.Models.UploadImagesModels>
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Korisnički profil";
+    Layout = "~/Views/Shared/LayoutKorisnik.cshtml";
+}
+   <br />
+<br />
+<br />
+
+<div class="col-md-12" style="margin-top:100px">
+    <div class="banner_inner  align-items-center">
+        <div class="banner_content">
+            <div class="media">
+                <div style="height:400px;margin-left:10px" class="col-md-4">
+                    <div style="border-style:solid">
+                        @if (Model.Item1.putanjaDoProfilneSlike == null)
+                        {
+                            <img src="@Url.Content("/Content/noPicturesYetKorisnik.png")" style="width:328px;height:300px"> }
+                        else
+                        {
+                            <img src="@Url.Content(Model.Item1.putanjaDoProfilneSlike)" style="width:328px;height:300px">}
+                    </div>
+                    <div style="margin-left:30px">
+                        @Html.Partial("UploadajProfilnuSliku", Model.Item2)
+                    </div>
+                </div>
+                <center class="col-md-8">
+                    <div class="media-body" style="height:300px;border-style:solid">
+                        <div class="personal_text">
+                            <h3>@Model.Item1.korisničkoImeKorisnik</h3>
+                            <br />
+                            <br />
+                            <ul class="list basic_info">
+                                <li><a><i class="lnr lnr-envelope"></i>@Model.Item1.registracijskiEmailKorisnik</a></li>
+                                <li>
+                                    <a href="@Url.Action("ChangePassword", "Korisnik", new { id = Model.Item1.idKorisnik})"><input type="button" class="btn btn-primary" value="Promjeni lozinku"><i class="lnr lnr-lock"></i></a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Delete", "Korisnik", new { id = Model.Item1.idKorisnik})"><input type="button" class="btn btn-primary" value="Obriši račun"><i class="lnr lnr-warning"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+<br />
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        };
+    </script>
+}

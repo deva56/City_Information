@@ -1,0 +1,151 @@
+﻿@model CityInformation.Models.Pretraživanje
+
+@{
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "partialView"
+    };
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@using (Ajax.BeginForm("PretraživanjeRezultata", "Home", ajaxOptions, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+
+    <div class="container">
+        <center>
+            <div class="form-group col-md-12">
+                @Html.TextBoxFor(model => model.tekst, htmlAttributes: new { id = "textbox", @class = "form-control", @placeholder = "Ime poduzeća ili njegov dio..." })
+                @Html.ValidationMessageFor(model => model.tekst, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Tip djelatnosti
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.djelatnost, (SelectList)ViewBag.djelatnost, "Odaberite", htmlAttributes: new { id = "idDjelatnost", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.djelatnost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Županija
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.županija, ViewBag.idŽupanija as SelectList, "Odaberite županiju", htmlAttributes: new { id = "idŽupanija", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.županija, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Grad
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.grad, new SelectList(string.Empty, "idGrad", "imeGrad"), "Prvo odaberite županiju", htmlAttributes: new { id = "idGrad", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.grad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Ulica
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.ulica, new SelectList(string.Empty, "idUlica", "imeUlica"), "Prvo odaberite grad", htmlAttributes: new { id = "idUlica", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.ulica, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" name="filtriraj" value="Filtriraj" class="btn btn-primary" id="gumb2" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+<center>
+    @using (Html.BeginForm("CreatePDF", "Home", new { id = "createpdf" }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.tekst, new { id = "tekst" })
+        @Html.HiddenFor(m => m.djelatnost, new { id = "djelatnost" })
+        @Html.HiddenFor(m => m.grad, new { id = "grad" })
+        @Html.HiddenFor(m => m.županija, new { id = "županija" })
+        @Html.HiddenFor(m => m.ulica, new { id = "ulica" })
+
+        <div class="form-group">
+            <div class="col-md-12" style="margin-left:10px">
+                <input type="submit" name="kreirajpdf" value="Kreiraj PDF" class="btn btn-primary" id="gumb" />
+            </div>
+        </div>
+    }
+    <br />
+</center>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idŽupanija").change(function () {
+            var url = '@Url.Content("~/Home/ŽupanijaChanged")';
+            $.get(url, { idŽupanija: $("#idŽupanija").val() }, function (data) {
+                var items = '';
+                $("#idGrad").empty();
+                items += "<option value='" + "'>" + "Odaberite grad" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idGrad").html(items);
+            });
+        })
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idGrad").change(function () {
+            var url = '@Url.Content("~/Home/GradChanged")';
+            $.get(url, { idGrad: $("#idGrad").val() }, function (data) {
+                var items = '';
+                $("#idUlica").empty();
+                items += "<option value='" + "'>" + "Odaberite ulicu" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idUlica").html(items);
+            });
+        })
+    });
+</script>
+
+<script type="text/javascript">
+    $("#gumb2").click(function () {
+        $("#tekst").val($("#textbox").val());
+        $("#djelatnost").val($("#idDjelatnost").val());
+        $("#županija").val($("#idŽupanija").val());
+        $("#grad").val($("#idGrad").val());
+        $("#ulica").val($("#idUlica").val());
+    });
+</script>

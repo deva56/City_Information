@@ -1,0 +1,35 @@
+﻿@model CityInformation.Models.poduzeće
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Brisanje računa iz baze";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<br />
+<br />
+<br />
+<h3 class="text-center">Jeste li sigurni da želite obrisati svoj korisnički profil poduzeća? Svi podatci će biti izgubljeni.</h3>
+<div>
+    <hr />
+
+    <h3 class="text-center">Ovaj korak je nepovratan!</h3>
+
+    <br />
+    <br />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12" style="display:flex">
+            <div class="form-actions no-color text-center" style="margin:auto">
+                <input type="submit" value="Obriši" class="btn btn-primary" id="gumb" />
+            </div>
+            <div class="form-actions no-color text-center" style="margin:auto">
+                <a href="@Url.Action("Profil", "Poduzeće")"><input type="button" class="btn btn-primary" value="Odustani"></a>
+            </div>
+        </div>
+    }
+</div>
+
+

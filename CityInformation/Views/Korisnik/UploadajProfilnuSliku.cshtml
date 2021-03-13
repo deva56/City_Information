@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNet.Identity
+@model  CityInformation.Models.UploadImagesModels
+
+
+    @using (Html.BeginForm("UpravljanjeSlikomProfila", "Korisnik", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="file" id="fileLoader" name="ImageFile" style="margin-right:200px" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-12" style="margin-left:50px">
+                <input type="submit" value="Promijeni sliku" class="btn btn-primary" style="font-size:smaller;width:auto;height:auto;margin:auto" />
+            </div>
+        </div>
+    }

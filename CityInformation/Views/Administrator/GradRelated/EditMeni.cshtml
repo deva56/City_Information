@@ -1,0 +1,90 @@
+﻿@model CityInformation.Models.grad
+
+@{
+    ViewBag.Title = "Uređivanje podataka o gradu";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+
+<br />
+<br />
+<h2 class="text-center">Uređivanje podataka o gradu iz baze</h2>
+
+@using (Html.BeginForm("EditGradGet", "Administrator"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <hr />
+
+    <div class="container">
+        <center>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group col-md-12">
+                <div>
+                    Ime županije
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.županija, ViewBag.idŽupanija as SelectList, "Odaberite županiju", htmlAttributes: new { id = "idŽupanija", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.županija, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div>
+                    Ime grada
+                </div>
+                <div class="dropdown" style="width:300px">
+                    @Html.DropDownListFor(model => model.idGrad, new SelectList(string.Empty, "idGrad", "imeGrad"), "Prvo odaberite županiju", htmlAttributes: new { id = "idGrad", @class = "form-control dropdown-select" })
+
+                </div>
+                <div>
+                    @Html.ValidationMessageFor(model => model.idGrad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </center>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Ažuriraj" class="btn btn-primary" />
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Natrag", "GlavniMeni")
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#idŽupanija").change(function () {
+            var url = '@Url.Content("~/Administrator/ŽupanijaChanged")';
+            $.get(url, { idŽupanija: $("#idŽupanija").val() }, function (data) {
+                var items = '';
+                $("#idGrad").empty();
+                items += "<option value='" + "'>" + "Odaberite grad" + "</option>";
+                $.each(data, function (index, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#idGrad").html(items);
+            });
+        })
+    });
+</script>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("Ne možete ažurirati grad u bazi jer još ništa nemate u bazi!");
+        };
+    </script>
+}

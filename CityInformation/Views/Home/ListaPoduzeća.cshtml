@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CityInformation.Models.poduzeće>
+
+@{
+    if (Model.Count() == 0)
+    {
+        <h2 class="text-center">Vaša pretraga nije urodila plodom. Pokušajte modificirati parametre filtera.</h2>
+    }
+    else
+    {
+        <table class="table text-center">
+            <tr>
+                <th class="text-center">
+                    Ime poduzeća
+                </th>
+                <th class="text-center">
+                    Tip djelatnosti
+                </th>
+                <th class="text-center">
+                    Županija
+                </th>
+                <th class="text-center">
+                    Grad
+                </th>
+                <th class="text-center">
+                    Ulica
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.imePoduzeće)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.djelatnost.imeDjelatnost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.županija.imeŽupanija)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.grad.imeGrad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ulica.imeUlica)
+                    </td>
+                    <td>
+                        <div style="font-size:18px;font-weight:bold">
+                            @Html.ActionLink("Istraži", "ProfilGosti", new { id = item.idPoduzeće })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}

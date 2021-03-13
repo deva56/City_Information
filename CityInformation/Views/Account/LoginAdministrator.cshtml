@@ -1,0 +1,50 @@
+﻿@using CityInformation.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Logiranje administratora";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<br />
+<br />
+<h2 class="text-center">Administrator login interface</h2>
+
+<center>
+@using (Html.BeginForm("LoginAdministrator", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="checkbox">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.Label("Zapamti me?")
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-12">
+            <input type="submit" value="Log in" class="btn btn-primary" />
+        </div>
+    </div>
+}
+</center>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

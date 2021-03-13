@@ -1,0 +1,32 @@
+﻿@model CityInformation.Models.aspnetuser
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Brisanje admina iz baze";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+
+<h2 class="text-center">Obriši admina iz baze</h2>
+
+<h3 class="text-center">Jeste li sigurni da želite obrisati ovoga admina iz baze?</h3>
+<div>
+    <hr />
+    <div class="text-center">
+        @Html.Label("Korisničko ime: ")
+
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color text-center">
+            <input type="submit" value="Obriši" class="btn btn-primary" id="gumb" /> |
+            @Html.ActionLink("Odustani", "Index")
+        </div>
+    }
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CityInformation.Models.administrator>
+
+@{
+    ViewBag.Title = "Lista administratora";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+<br />
+<br />
+<h2 class="text-center">Lista administratora</h2>
+<div>
+    @Html.ActionLink("Kreiraj novog administratora", "Create")
+</div>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            Korisničko ime administratora
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.imeAdministratora)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink("Promijeni lozinku", "ChangePassword", new { id = item.idAdministratora }) |
+                @Html.ActionLink("Obriši", "Delete", new { id = item.idAdministratora })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("Ne možete obrisati račun jer ste trenutno ulogirani u njega!");
+        };
+    </script>
+}

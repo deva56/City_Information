@@ -1,0 +1,35 @@
+﻿@model CityInformation.Models.recenzija
+
+
+@using (Html.BeginForm("KreirajRecenziju", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.poduzećeRecenzijaID)
+    @Html.HiddenFor(model => model.vlasnikRecenzijaID)
+    @Html.HiddenFor(model => model.datumRecenzija)
+
+
+    <div class="container">
+        <center>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.Label("Tekst recenzije", htmlAttributes: new { @class = "control-label" })
+                        @Html.TextAreaFor(Model => Model.tekstRecenzija, new { @class = "form-control", @style = "resize: none", @placeholder = "Vaša recenzija..." })
+                        @Html.ValidationMessageFor(Model => Model.tekstRecenzija, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Komentiraj" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+            <br />
+        </center>
+    </div>
+}

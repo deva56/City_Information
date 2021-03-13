@@ -1,0 +1,94 @@
+﻿@model IEnumerable<CityInformation.Models.administrator>
+
+@{
+    ViewBag.Title = "Glavni izbornik";
+    Layout = "~/Views/Shared/LayoutAdminGlavniMeni.cshtml";
+}
+
+<h2 class="text-center">Glavni meni za upravljanje</h2>
+<br />
+
+
+<center>
+    <div class="col-md-12">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje administratorima</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("Index", "Administrator")">Lista administratora</a>
+                <a href="@Url.Action("Create", "Administrator")">Kreiraj novog administratora</a>
+                <a href="@Url.Action("Index", "Administrator")">Obriši administratora</a>
+                <a href="@Url.Action("Index", "Administrator")">Promijeni lozinku administratoru</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-top:50px;margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje korisnicima</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("IndexKorisnik", "Administrator")">Lista korisnika</a>
+                <a href="@Url.Action("CreateKorisnik", "Administrator")">Kreiraj novog korisnika</a>
+                <a href="@Url.Action("IndexKorisnik", "Administrator")">Promijeni lozinku korisniku</a>
+                <a href="@Url.Action("IndexKorisnik", "Administrator")">Obriši korisnika</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje poduzećima</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("IndexPoduzeće", "Administrator")">Lista poduzeća</a>
+                <a href="@Url.Action("CreatePoduzeće", "Administrator")">Kreiraj novo poduzeće</a>
+                <a href="@Url.Action("IndexPoduzeće", "Administrator")">Promijeni lozinku poduzeću</a>
+                <a href="@Url.Action("IndexPoduzeće", "Administrator")">Obriši poduzeće</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje djelatnostima</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("CreateDjelatnost", "Administrator")">Dodaj djelatnost u bazu</a>
+                <a href="@Url.Action("EditMeniDjelatnost", "Administrator")">Uredi djelatnost</a>
+                <a href="@Url.Action("DeleteMeniDjelatnost", "Administrator")">Obriši djelatnost iz baze</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje županijama</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("CreateŽupanija", "Administrator")">Dodaj županiju u bazu</a>
+                <a href="@Url.Action("EditMeniŽupanija", "Administrator")">Uredi županiju</a>
+                <a href="@Url.Action("DeleteMeniŽupanija", "Administrator")">Obriši županiju iz baze</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje gradovima</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("CreateGrad", "Administrator")">Dodaj grad u bazu</a>
+                <a href="@Url.Action("EditMeniGrad", "Administrator")">Uredi grad</a>
+                <a href="@Url.Action("DeleteMeniGrad", "Administrator")">Obriši grad iz baze</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje ulicama</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("CreateUlica", "Administrator")">Dodaj ulicu u bazu</a>
+                <a href="@Url.Action("EditMeniUlica", "Administrator")">Uredi ulicu</a>
+                <a href="@Url.Action("DeleteMeniUlica", "Administrator")">Obriši ulicu iz baze</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom:50px">
+        <div class="dropdown">
+            <button class="dropbtn" style="width:500px">Upravljanje recenzijama</button>
+            <div class="dropdown-content col-md-12">
+                <a href="@Url.Action("OdobriRecenzijaList", "Administrator")">Odobri zahtjeve recenzija</a>
+            </div>
+        </div>
+    </div>
+</center>

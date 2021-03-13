@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CityInformation.Models.recenzija>
+@using Microsoft.AspNet.Identity
+
+@{
+    if (Model.Count() == 0)
+    {
+        <h3 class="text-center">Nema još komentara. Budite prvi i pomozite drugima pronaći lakše mjesto po njihovoj želji!</h3>
+        <p>
+            @Html.Action("KreirajRecenziju","Home", new { id = User.Identity.GetUserId()})
+        </p>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Korisničko ime
+                </th>
+                <th>
+                    Recenzija
+                </th>
+                <th>
+                    Datum recenzije
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.korisnik.korisničkoImeKorisnik)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tekstRecenzija)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.datumRecenzija)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    }
+}
+
+

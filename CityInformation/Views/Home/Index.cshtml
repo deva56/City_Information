@@ -1,0 +1,369 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="~/assets/images/ikona.png" type="image/x-icon">
+    <meta name="description" content="">
+
+
+    <title>Home</title>
+    <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/facebook-plugin/style.css">
+    <link rel="stylesheet" href="assets/animatecss/animate.min.css">
+    <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
+    <link rel="stylesheet" href="assets/mobirise/css/style.css">
+    <link rel="stylesheet" href="assets/mobirise-slider/style.css">
+    <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css">
+    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+    <style>
+        .arrow {
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+        }
+
+        .up {
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+        }
+    </style>
+
+
+</head>
+<body>
+    <section class="mbr-navbar mbr-navbar--freeze mbr-navbar--absolute mbr-navbar--sticky mbr-navbar--auto-collapse" id="ext_menu-8" data-rv-view="41">
+        <div class="mbr-navbar__section mbr-section">
+            <div class="mbr-section__container container">
+                <div>
+                    <div class="mbr-navbar__container">
+                        <div class="mbr-navbar__column mbr-navbar__column--s mbr-navbar__brand">
+                            <span class="mbr-navbar__brand-link mbr-brand mbr-brand--inline">
+                                <span class="mbr-brand__logo"><a href="@Url.Action("Index", "Home")" class="mobi-mbri mobi-mbri-home mbr-iconfont mbr-iconfont-menu"></a></span>
+                                <span class="mbr-brand__name"><a class="mbr-brand__name text-white" href="@Url.Action("Index", "Home")">City info</a></span>
+                            </span>
+                        </div>
+                        <div class="mbr-navbar__hamburger mbr-hamburger"><span class="mbr-hamburger__line"></span></div>
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                            }
+                            <div class="mbr-navbar__column mbr-navbar__menu">
+                                <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+                                    <div class="mbr-navbar__column">
+                                        <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active mbr-buttons--only-links"><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="@Url.Action("ResolveProfileRole", "Account")">@User.Identity.GetUserName()</a></li><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="javascript:document.getElementById('logoutForm').submit()">Izlogiraj me</a></li></ul>
+                                    </div>
+                                </nav>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="mbr-navbar__column mbr-navbar__menu">
+                                <nav class="mbr-navbar__menu-box mbr-navbar__menu-box--inline-right">
+                                    <div class="mbr-navbar__column">
+                                        <ul class="mbr-navbar__items mbr-navbar__items--right float-left mbr-buttons mbr-buttons--freeze mbr-buttons--right btn-decorator mbr-buttons--active mbr-buttons--only-links"><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="@Url.Action("Register", "Account")">Registracija</a></li><li class="mbr-navbar__item"><a class="mbr-buttons__link btn text-white" href="@Url.Action("Login", "Account")">Prijava</a></li></ul>
+
+                                    </div>
+                                </nav>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="engine"><a></a></section><section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted mbr-parallax-background" id="header4-o" data-rv-view="0" style="background-image: url(Content/zagreb_hd.jpg);">
+        <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-center mbr-after-navbar">
+
+            <div class="mbr-box__container mbr-section__container container">
+                <div class="mbr-box mbr-box--stretched">
+                    <div class="mbr-box__magnet mbr-box__magnet--center-center">
+                        <div class="row">
+                            <div class=" col-sm-8 col-sm-offset-2">
+                                <div class="mbr-hero animated fadeInUp" style="background-color:lightslategrey">
+                                    <h1 class="mbr-hero__text">City info</h1>
+                                    <p class="mbr-hero__subtext">Ako ste novi u nekome gradu i želite iskusiti sve što on nudi na našoj platformi potražite sve što Vas zanima.</p>
+                                </div>
+                                <br />
+                                <div class="mbr-buttons btn-inverse mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-danger animated fadeInUp delay" href="@Url.Action("Pretraživanje", "Home")">Pretraži</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mbr-slider mbr-section mbr-section--no-padding carousel slide" data-ride="carousel" data-wrap="true" data-interval="5000" id="slider-r" data-rv-view="3" style="background-color: rgb(255, 255, 255);">
+        <div class="mbr-section__container">
+            <div>
+                <ol class="carousel-indicators">
+                    <li data-app-prevent-settings="" data-target="#slider-r" data-slide-to="0" class="active"></li>
+                    <li data-app-prevent-settings="" data-target="#slider-r" data-slide-to="1"></li>
+                    <li data-app-prevent-settings="" data-target="#slider-r" class="" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height active" style="background-image: url(assets/images/mbr-1535x1920.jpg);">
+                        <div class="mbr-box__magnet mbr-box__magnet--center-right mbr-box__magnet--sm-padding">
+
+                            <div class=" container">
+
+                                <div class="row">
+                                    <div class=" col-md-6 col-md-offset-5">
+
+                                        <div class="mbr-hero" style="background-color:lightslategrey">
+                                            <h1 class="mbr-hero__text">Naša svrha</h1>
+                                            <p class="mbr-hero__subtext">
+                                                Naša platforma je posebno napravljena da bi Vama olakšali snalaženje u novom okruženju i učinili boravak u novome gradu
+                                                što ugodnijim i uzbudljivijim!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/mbr-1-1920x1280.jpg);">
+                        <div class="mbr-box__magnet mbr-box__magnet--center-left mbr-box__magnet--sm-padding">
+
+                            <div class=" container">
+
+                                <div class="row">
+                                    <div class=" col-md-offset-1 col-md-6">
+
+                                        <div class="mbr-hero" style="background-color:lightslategrey">
+                                            <h1 class="mbr-hero__text">Za poduzeća</h1>
+
+                                            <p class="mbr-hero__subtext">
+                                                Ako ste poduzeće i zainteresirani ste da se oglašavate na našoj stranici javite nam se na službenu e-mail adresu.
+                                                Radujemo se zajedničkoj suradnji!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--bg-adapted item dark center mbr-section--full-height" style="background-image: url(assets/images/mbr-2-1920x1280.jpg);">
+                        <div class="mbr-box__magnet mbr-box__magnet--center-center mbr-box__magnet--sm-padding">
+
+                            <div class=" container">
+
+                                <div class="row">
+                                    <div class=" col-md-8 col-md-offset-2">
+
+                                        <div class="mbr-hero" style="background-color:lightslategrey">
+                                            <h1 class="mbr-hero__text">Za korisnike</h1>
+
+                                            <p class="mbr-hero__subtext">
+                                                Ako ste korisnik koji se nalazi u jednom od gradova koje pokrivamo i želite saznati za neko popularno i dobro mjesto jednostavnim pretraživanjem na
+                                                našoj stranici pronađite sve što vas zanima!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a data-app-prevent-settings="" class="left carousel-control" role="button" data-slide="prev" href="#slider-r">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a data-app-prevent-settings="" class="right carousel-control" role="button" data-slide="next" href="#slider-r">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="testimonials1-q" data-rv-view="15" style="background-color: rgb(204, 204, 204);">
+        <div>
+
+            <div class="mbr-section__container mbr-section__container--std-padding container" style="padding-top: 93px; padding-bottom: 93px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="mbr-section__header">Što kažu naši korisnici</h2>
+                        <ul class="mbr-reviews mbr-reviews--wysiwyg row">
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p">Oduševljen sam aplikacijom. Prvi put sam nedavno bio u Varaždinu i zanimalo me je koji su najbolji restorani za posjetiti tamo. Malo sam čitao recenzije, gledao ocjene i našao pravi pogodak. Sve pet!</p></div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Ivan S.</div>
+                                    <div class="mbr-reviews__author-bio">Korisnik</div>
+                                </div>
+                            </li>
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p">Najviše mi se sviđa što je stranica jednostavna za korištenje. Samo odabereš grad i šta te u njemu zanima i dobiješ rezultate. Bez puno muke sam uvijek pronalazila ono što me zanima, a nadam se da će tako ostati i dalje :) </p></div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Mirna A.</div>
+                                    <div class="mbr-reviews__author-bio">Korisnik</div>
+                                </div>
+                            </li>
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p">Često putujem zbog posla pa me zanima kako najbolje iskorisiti vrijeme koje provodim u drugim gradovima. Korištenje ove stranice mi je to uvelike pomoglo i sad idem direkt u ona mjesta gdje znam da će mi se svidjeti. </p></div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Luka N.</div>
+                                    <div class="mbr-reviews__author-bio">Korisnik</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="testimonials1-s" data-rv-view="28" style="background-color: rgb(255, 255, 255);">
+        <div>
+
+            <div class="mbr-section__container mbr-section__container--std-padding container" style="padding-top: 93px; padding-bottom: 93px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="mbr-section__header">A što naši zadovoljni partneri</h2>
+                        <ul class="mbr-reviews mbr-reviews--wysiwyg row">
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p"></p>Otkako smo se krenuli oglašavati na našoj platformi posao nam se udvostručio. Ljudi u opisu vide da smo drukčiji od običnog kafića i žele probati nešto novo. Najbolja odluka koju smo donijeli u svom poslovanju je sigurno što smo se našli ovdje!</div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Smile</div>
+                                    <div class="mbr-reviews__author-bio">Kafić</div>
+                                </div>
+                            </li>
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p">Oglašavanje na City info portalu nije nam donijelo samo poboljšanje već i neke negativne stvari. Naime zbog toliko više posla sada nemamo gdje sa gostima pa se moramo širiti na još jednu lokaciju. Naravno, šalimo se kao i uvijek, a to sada i možemo jer znamo da nam je siguran vjetar u leđa dala upravo City info platforma.</p></div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Rustika</div>
+                                    <div class="mbr-reviews__author-bio">Restoran</div>
+                                </div>
+                            </li>
+                            <li class="mbr-reviews__item col-xs-12 col-sm-6 col-md-4">
+                                <div class="mbr-reviews__text"><p class="mbr-reviews__p">Pošto smo malo obiteljsko kino teško nam je konkurirati gigantu poput Cinestara. Ipak imamo svoju publiku kojoj je jedino teško nas pronaći. Uz pomoć City info-a sada naši ljudi lakše dolaze do nas i uživaju u našoj opuštenoj atmosferi :)</p></div>
+                                <div class="mbr-reviews__author mbr-reviews__author--short">
+                                    <div class="mbr-reviews__author-name">Gradsko kino Teatar</div>
+                                    <div class="mbr-reviews__author-bio">Kino</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="social-buttons1-l" data-rv-view="43" style="background-color: rgb(60, 60, 60);">
+
+        <div class="mbr-section__container container">
+            <div class="mbr-header mbr-header--inline row" style="padding-top: 27.2px; padding-bottom: 27.2px;">
+                <div class="col-sm-8">
+                    <h3 class="mbr-header__text">Pronađite nas na društvenim mrežama!</h3>
+                </div>
+                <div class="mbr-social-icons col-sm-4">
+                    <div class="mbr-social-likes social-likes_style-1" data-counters="false">
+                        <div class="mbr-social-icons__icon social-likes__icon  socicon-bg-facebook" title="Share link on Facebook">
+                            <i class="socicon socicon-facebook"></i>
+
+                        </div>
+                        <div class="mbr-social-icons__icon social-likes__icon  socicon-bg-googleplus" title="Share link on Google+">
+                            <i class="socicon socicon-googleplus"></i>
+
+                        </div>
+                        <div class="mbr-social-icons__icon social-likes__icon  socicon-bg-twitter" title="Share link on Twitter">
+                            <i class="socicon socicon-twitter"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mbr-section mbr-section--relative mbr-section--fixed-size" id="contacts3-k" data-rv-view="45" style="background-color: rgb(60, 60, 60);">
+
+        <div class="mbr-section__container container">
+            <div class="mbr-contacts mbr-contacts--wysiwyg row" style="padding-top: 45px; padding-bottom: 45px;">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-5 text-center">
+                            <p class="mbr-contacts__text">
+                                <strong>ADRESA</strong><br>
+                                Ulica Braće Radić 55<br>
+                                10000, Zagreb<br><br>
+                                <strong>KONTAKT</strong><br>
+                                Email: info@cityinfo.com<br>
+                                Telefon: +385 01 333 333<br>
+                            </p>
+                        </div>
+                        <div class="mbr-contacts__column col-sm-6" data-form-type="formoid">
+                            <div data-form-alert="true">
+                                <div class="hide" data-form-alert-success="true">Hvala na poruci!</div>
+                            </div>
+                            <form method="post" data-form-title="MESSAGE">
+                                <input type="hidden" value="tUWwyORp9vtG3Kg830vkGN9gdKCG5RZ5CQzn33fzVQhyPMj9twOhXbV1mL+W7HY8wbUcKDIAX+vDpCXWSvYPg0pyUdVkL0UluiSB7lpKpkyamh1PjJEhttZLnnCpjYRr" data-form-email="true">
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control input-sm input-inverse" name="email" required="" placeholder="Email*" data-form-field="Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control input-sm input-inverse" style="resize:none" name="message" rows="4" placeholder="Poruka" data-form-field="Message"></textarea>
+                                </div>
+                                <div class="mbr-buttons mbr-buttons--right btn-inverse"><button type="submit" class="mbr-buttons__btn btn btn-danger">POŠALJI</button></div>
+                            </form>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="mbr-buttons--center btn-inverse"><button type="button" onclick='scrollToElement("ext_menu-8");' class="mbr-buttons__btn btn btn-primary">Odvedi me gore</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="assets/web/assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5"></script>
+    <script src="https://apis.google.com/js/plusone.js"></script>
+    <script src="assets/facebook-plugin/facebook-script.js"></script>
+    <script src="assets/jarallax/jarallax.js"></script>
+    <script src="assets/smooth-scroll/smooth-scroll.js"></script>
+   
+    <script src="assets/bootstrap-carousel-swipe/bootstrap-carousel-swipe.js"></script>
+    <script src="assets/social-likes/social-likes.js"></script>
+    <script src="assets/mobirise/js/script.js"></script>
+    <script src="assets/formoid/formoid.min.js"></script>
+
+    <footer style="width:100%;height:30px;background-color:burlywood">
+        <p class="text-center">&copy; @DateTime.Now.Year - City info d.o.o.</p>
+    </footer>
+</body>
+</html>
+
+<script type='text/javascript'>
+    function scrollToElement(id) {
+
+        var target = document.getElementById(id).offsetTop;
+
+        window.scrollTo({
+            left: 0,
+            top: target,
+            behavior: "smooth"
+        });
+    }
+</script>
+

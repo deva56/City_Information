@@ -1,0 +1,25 @@
+﻿@model Tuple<List<CityInformation.Models.poduzeće>, CityInformation.Models.Pretraživanje>
+
+
+@{
+    ViewBag.Title = "Pretraživanje";
+    Layout = "~/Views/Shared/LayoutMain.cshtml";
+}
+
+<br />
+<br />
+
+<h2 class="text-center">Pretraživanje</h2>
+
+
+<div>
+    @{ Html.RenderPartial("Filter", Model.Item2); }
+</div>
+
+
+<br />
+<br />
+
+<div id="partialView">
+    @{ Html.RenderPartial("ListaPoduzeća", Model.Item1); }
+</div>

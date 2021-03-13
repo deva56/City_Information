@@ -1,0 +1,65 @@
+﻿@model CityInformation.Models.RegisterViewModelPoduzeće
+
+@{
+    ViewBag.Title = "Kreiranje poduzeća";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+<h2 class="text-center">Kreiraj novo poduzeće u bazi</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+
+    <div class="container">
+        <center>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group col-lg-12">
+                @Html.Label("Korisničko ime", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </center>
+
+        <center>
+            <div class="form-group col-lg-12">
+                @Html.Label("Ime poduzeća", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.ImePoduzeća, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImePoduzeća, "", new { @class = "text-danger" })
+            </div>
+        </center>
+
+        <center>
+            <div class="form-group col-md-12">
+                @Html.Label("Lozinka", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </center>
+
+        <center>
+            <div class="form-group">
+                @Html.Label("Ponovna lozinka", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+        </center>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Kreiraj" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Natrag", "IndexPoduzeće")
+</div>

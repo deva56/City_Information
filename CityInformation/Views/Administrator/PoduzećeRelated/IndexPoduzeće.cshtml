@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CityInformation.Models.poduzeće>
+
+@{
+    ViewBag.Title = "Lista poduzeća";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+
+}
+
+<br />
+<br />
+<h2 class="text-center">Lista poduzeća u bazi</h2>
+<div>
+    @Html.ActionLink("Kreiraj novo poduzeće", "CreatePoduzeće")
+</div>
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            Korisničko ime poduzeća
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.korisničkoImePoduzeće)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink("Promijeni lozinku", "ChangePasswordPoduzeće", new { id = item.idPoduzeće }) |
+                @Html.ActionLink("Obriši", "DeletePoduzeće", new { id = item.idPoduzeće })
+            </td>
+        </tr>
+    }
+
+</table>
